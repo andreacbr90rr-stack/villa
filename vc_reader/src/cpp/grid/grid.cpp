@@ -459,7 +459,7 @@ __attribute__((target("avx2"))) inline unsigned sampleEightAt(ChunkLookup<Load>&
         _mm256_store_si256(reinterpret_cast<__m256i*>(chunks[a]), chunk[a]);
     const __m256i bit = _mm256_setr_epi32(1, 2, 4, 8, 16, 32, 64, 128);
     __m256i r00 = _mm256_setzero_si256(), r10 = r00, r01 = r00, r11 = r00;
-    unsigned done = 0;
+    unsigned done = 0, gathered = 0;
     while (left) {  // one round per chunk the remaining lanes are in
         const int l = std::countr_zero(left);
         const std::int64_t c[3]{chunks[0][l], chunks[1][l], chunks[2][l]};
@@ -470,8 +470,15 @@ __attribute__((target("avx2"))) inline unsigned sampleEightAt(ChunkLookup<Load>&
         left &= ~lanes;
         const std::int64_t key = L.keyOffset + (c[0] * L.grid[1] + c[1]) * L.grid[2] + c[2];
         const auto& slot = L.slots[L.last].key == key ? L.slots[L.last] : L.find(key, c);
-        if (!slot.available || !slot.chunk)
+        if (!slot.available)
             continue;
+        if (!slot.chunk) {
+            // Every corner is in this same absent block. A declared +0 fill
+            // has exactly the initialized vector value, with no voxel loads.
+            if (std::bit_cast<std::uint32_t>(L.fill) == 0)
+                done |= lanes;
+            continue;
+        }
         // Each gather reads four bytes: the voxel, its +x neighbour and two bytes more.
         const std::int64_t room = std::int64_t(slot.chunk->size()) - L.channelOffset - s0 - s1 - 3;
         if (room <= 0)
@@ -485,9 +492,14 @@ __attribute__((target("avx2"))) inline unsigned sampleEightAt(ChunkLookup<Load>&
         r01 = _mm256_mask_i32gather_epi32(r01, data, _mm256_add_epi32(offset, _mm256_set1_epi32(s1)), take, 1);
         r11 = _mm256_mask_i32gather_epi32(r11, data, _mm256_add_epi32(offset, _mm256_set1_epi32(s0 + s1)), take, 1);
         done |= lanes;
+        gathered |= lanes;
     }
     if (!done)
         return 0;
+    if (!gathered) {
+        _mm256_storeu_ps(out, zero);
+        return done;
+    }
     const __m256i byte = _mm256_set1_epi32(0xff);
     // z y x: the low byte is the voxel, the next its +x neighbour.
     const __m256 v000 = _mm256_cvtepi32_ps(_mm256_and_si256(r00, byte)), v001 = _mm256_cvtepi32_ps(_mm256_and_si256(_mm256_srli_epi32(r00, 8), byte));

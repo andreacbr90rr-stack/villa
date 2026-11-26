@@ -1,0 +1,95 @@
+{
+  "data_origin": "https://vesuvius-challenge-open-data.s3.us-east-1.amazonaws.com/",
+  "sample": "PHerc1447",
+  "volume": "20250521151220",
+  "voxel_um": 8.64,
+  "segment": "20250502182456",
+  "canvas_depth_yx": [
+    31,
+    4720,
+    3240
+  ],
+  "roi_yxhw": [
+    3968,
+    2688,
+    128,
+    128
+  ],
+  "raster_uv": [
+    134.4250020030886,
+    198.4250029567629,
+    0.05000000074505806,
+    0.05000000074505806,
+    128,
+    128
+  ],
+  "depth_offsets": [
+    15,
+    14,
+    13,
+    12,
+    11,
+    10,
+    9,
+    8,
+    7,
+    6,
+    5,
+    4,
+    3,
+    2,
+    1,
+    0,
+    -1,
+    -2,
+    -3,
+    -4,
+    -5,
+    -6,
+    -7,
+    -8,
+    -9,
+    -10,
+    -11,
+    -12,
+    -13,
+    -14,
+    -15
+  ],
+  "expected_dense_u8_sha256": "dca38a65414358c342710c605ce2bf2d8e919a1b69131652f86dff0823d1d4d4",
+  "expected_restored_historical_columns": 14,
+  "objects": {
+    "volume/.zarray": {
+      "key": "PHerc1447/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr/0/.zarray",
+      "sha256": "55afda2ebb68ddb376a33f87d8d624683162e9cef3bc7d36fc5fb92eb1b9fb60"
+    },
+    "mesh/meta.json": {
+      "key": "PHerc1447/segments/20250502182456-auto_grown_20250502161202782/mesh/20250502182456-on-20250521151220-8.64um.tifxyz/meta.json",
+      "sha256": "bbd9ad8e3aa5ffcf6019411e2bb9179fead90840f18f4f5c23764b46b2ba5736"
+    },
+    "mesh/x.tif": {
+      "key": "PHerc1447/segments/20250502182456-auto_grown_20250502161202782/mesh/20250502182456-on-20250521151220-8.64um.tifxyz/x.tif",
+      "sha256": "9d9243a786ce3b0489de30dc8443e4c66b45f1fa4644e97de5dfca22eaa00f7f"
+    },
+    "mesh/y.tif": {
+      "key": "PHerc1447/segments/20250502182456-auto_grown_20250502161202782/mesh/20250502182456-on-20250521151220-8.64um.tifxyz/y.tif",
+      "sha256": "f3a092c8df45cdbe2a5e1ec02d80ff2dfcee9c62cd596ef92558a2d819ea0463"
+    },
+    "mesh/z.tif": {
+      "key": "PHerc1447/segments/20250502182456-auto_grown_20250502161202782/mesh/20250502182456-on-20250521151220-8.64um.tifxyz/z.tif",
+      "sha256": "bf2807991615d9a90e58d3273fb1a21827e4b2358fa4b15fe4f76e75501ab968"
+    },
+    "historical.u8": {
+      "key": "PHerc1447/segments/20250502182456-auto_grown_20250502161202782/surface-volumes/8.64um-1.2m-116keV-volume-20250521151220.zarr/0/0/31/21",
+      "sha256": "061d300fadc82fa4376333fd1ca06e429d9191ef8e188a95057d46c2235db70b"
+    },
+    "volume/189/31/44": {
+      "key": "PHerc1447/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr/0/189/31/44",
+      "sha256": "337830c6586d237c4bf880eb948441b3d7eedd98f6b9df48c07179cd25c5ccaf"
+    },
+    "volume/189/32/44": {
+      "key": "PHerc1447/volumes/20250521151220-8.640um-1.2m-116keV-masked.zarr/0/189/32/44",
+      "sha256": "20dc36b3a4b8752ee29256703ed64a517a190f5404380084ff922f85dc28ed70"
+    }
+  }
+}

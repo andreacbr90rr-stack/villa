@@ -1,0 +1,12 @@
+{
+  "bitwise_identical_fields": 27,
+  "stock_synthetic_median_s": 0.12586336200001824,
+  "candidate_synthetic_median_s": 0.0643227670007036,
+  "synthetic_saved_fraction": 0.4889476494303856,
+  "public_fixture": {
+    "recovered_columns": 14,
+    "dense_display_sha256": "dca38a65414358c342710c605ce2bf2d8e919a1b69131652f86dff0823d1d4d4",
+    "staged_ct_chunks": 2
+  },
+  "source_binaries_distinct": true
+}
